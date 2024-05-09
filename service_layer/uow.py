@@ -22,7 +22,8 @@ class UnitOfWorkBase(ABC):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.rollback()
+        if exc_type:
+            self.rollback()
 
     @abstractmethod
     def commit(self):
